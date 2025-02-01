@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client data - ADAMS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>ADAMS</h1>
+        <hr>
+        <img src="light-the-vet-flashlight-wallpaper-preview.jpg" alt="" style="height: 400px; width: 900px; ">
+        <hr>
+        <nav>
+            <ul>
+                <li><h2>Client Data</h2></li>
+            </ul>
+        </nav>
+        
+      </header>
+
+    <section id="data-entry">
+        <h2>Data Entry</h2>
+        <form id="data-form">
+            <label for="client-name">Client Name:</label>
+            <input type="text" id="client-name" name="client-name" required>
+
+            <label for="pet-name">Pet Name:</label>
+            <input type="text" id="pet-name" name="pet-name" required>
+
+            <label for="pet-type">Pet Type:</label>
+            <input type="text" id="pet-type" name="pet-type" required>
+
+            <label for="medical-history">Medical History:</label>
+            <textarea id="medical-history" name="medical-history" required></textarea>
+
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" name="height" required>
+
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" required>
+
+            <label for="last-appointment">Last Appointment:</label>
+            <input type="date" id="last-appointment" name="last-appointment" required>
+
+            <label for="upcoming-appointment">Upcoming Appointment:</label>
+            <input type="date" id="upcoming-appointment" name="upcoming-appointment" required>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <h3>Upload Excel Sheet</h3>
+        <input type="file" id="excel-upload" accept=".xlsx, .xls">
+        <button onclick="handleExcelUpload()">Upload</button>
+
+        <h3>Data Table</h3>
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Client Name</th>
+                    <th>Pet Name</th>
+                    <th>Pet Type</th>
+                    <th>Medical History</th>
+                    <th>Height (cm)</th>
+                    <th>Weight (kg)</th>
+                    <th>Last Appointment</th>
+                    <th>Upcoming Appointment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data rows will be inserted here -->
+            </tbody>
+        </table>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+    <hr>
+    <nav>
+        <a href="index.html" onclick="shut()">
+            <button class="BACKBTUN">
+                <h3 class="BACK">Go Back</h3>
+            </button>
+        </a>
+    </nav>
+    <hr>
+</body>
+</html>
