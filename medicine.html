@@ -1,59 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Medicine Vault - ADAMS</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <header>
-        <h1>ADAMS</h1>
-        <hr>
-        <img src="MEDS1.jpg" alt="" style="height: 400px; width: 100%;">
-        <hr>
-        <nav>
-            <ul>
-                <li><h2>Medicine Vault</h2></li>
-            </ul>
-        </nav>
-        
-      </header>
+      <h1>ADAMS</h1>
+      <hr />
+      <img src="MEDS1.jpg" alt="" style="height: 400px; width: 100%" />
+      <hr />
+      <nav>
+        <ul>
+          <li><h2>Medicine Vault</h2></li>
+        </ul>
+      </nav>
+    </header>
 
     <section id="medicine-vault">
-        <h2>Medicine Vault</h2>
-        <form id="medicine-form">
-            <label for="medicine-code">Medicine Code:</label>
-            <input type="text" id="medicine-code" name="medicine-code" required>
+      <h2>Medicine Vault</h2>
+      <form id="medicine-form">
+        <label for="medicine-code">Medicine Code:</label>
+        <input type="text" id="medicine-code" name="medicine-code" required />
 
-            <label for="medicine-name">Medicine Name:</label>
-            <input type="text" id="medicine-name" name="medicine-name" required>
+        <label for="medicine-name">Medicine Name:</label>
+        <input type="text" id="medicine-name" name="medicine-name" required />
 
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" required>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required />
 
-            <label for="expiry-date">Expiry Date:</label>
-            <input type="date" id="expiry-date" name="expiry-date" required>
+        <label for="expiry-date">Expiry Date:</label>
+        <input type="date" id="expiry-date" name="expiry-date" required />
 
-            <button type="submit">Add Medicine</button>
-        </form>
+        <button type="submit">Add Medicine</button>
+      </form>
 
-        <h3>Medicine Inventory</h3>
-        <table id="medicine-table">
-            <thead>
-                <tr>
-                    <th>Medicine Code</th>
-                    <th>Medicine Name</th>
-                    <th>Quantity</th>
-                    <th>Expiry Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Medicine rows will be inserted here -->
-            </tbody>
-        </table>
+      <h3>Medicine Inventory</h3>
+      <table id="medicine-table">
+        <thead>
+          <tr>
+            <th>Medicine Code</th>
+            <th>Medicine Name</th>
+            <th>Quantity</th>
+            <th>Expiry Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </section>
-    <hr>
+    <hr />
     <nav>
       <a href="index.html" onclick="shut()">
         <button class="BACKBTUN">
@@ -61,7 +58,7 @@
         </button>
       </a>
     </nav>
-    <hr>
+    <hr />
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
