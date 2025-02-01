@@ -32,7 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   startSciFiBackground();
 });
-
+function shut(){
+  window.open('index.html','_self');
+  window.close();
+}
 function showGlitchEffect() {
   document.body.classList.add("glitch-effect");
   setTimeout(() => {
