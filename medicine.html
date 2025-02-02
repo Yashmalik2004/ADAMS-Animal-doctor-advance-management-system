@@ -1,64 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicine Vault - ADAMS</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <header>
-      <h1>ADAMS</h1>
-      <hr />
-      <img src="MEDS1.jpg" alt="" style="height: 400px; width: 100%" />
-      <hr />
-      <nav>
-        <ul>
-          <li><h2>Medicine Vault</h2></li>
-        </ul>
-      </nav>
+        <h1>Medicine Vault</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Back to Home</a></li>
+            </ul>
+        </nav>
     </header>
 
     <section id="medicine-vault">
-      <h2>Medicine Vault</h2>
-      <form id="medicine-form">
-        <label for="medicine-code">Medicine Code:</label>
-        <input type="text" id="medicine-code" name="medicine-code" required />
+        <h2>Manage Medicine Inventory</h2>
 
-        <label for="medicine-name">Medicine Name:</label>
-        <input type="text" id="medicine-name" name="medicine-name" required />
+        <form id="medicine-form">
+            <label for="animal-type">Animal Type:</label>
+            <input type="text" id="animal-type" name="animal-type" required>
 
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" required />
+            <label for="disease">Disease:</label>
+            <input type="text" id="disease" name="disease" required>
 
-        <label for="expiry-date">Expiry Date:</label>
-        <input type="date" id="expiry-date" name="expiry-date" required />
+            <label for="medicine-name">Medicine Name:</label>
+            <input type="text" id="medicine-name" name="medicine-name" required>
 
-        <button type="submit">Add Medicine</button>
-      </form>
+            <label for="dosage">Dosage:</label>
+            <input type="text" id="dosage" name="dosage" required>
 
-      <h3>Medicine Inventory</h3>
-      <table id="medicine-table">
-        <thead>
-          <tr>
-            <th>Medicine Code</th>
-            <th>Medicine Name</th>
-            <th>Quantity</th>
-            <th>Expiry Date</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+            <label for="frequency">Frequency:</label>
+            <input type="text" id="frequency" name="frequency" required>
+
+            <label for="medicine-code">Medicine Code:</label>
+            <input type="text" id="medicine-code" name="medicine-code" required>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required>
+
+            <label for="expiry-date">Expiry Date:</label>
+            <input type="date" id="expiry-date" name="expiry-date" required>
+
+            <button type="submit">Add Medicine</button>
+        </form>
+
+        <h3>Upload Medicine Excel Sheet</h3>
+        <input type="file" id="medicine-excel-upload" accept=".xlsx, .xls">
+        <button onclick="handleMedicineExcelUpload()">Upload</button>
+
+        <h3>Medicine Inventory</h3>
+        <table id="medicine-table">
+            <thead>
+                <tr>
+                    <th>Animal Type</th>
+                    <th>Disease</th>
+                    <th>Medicine</th>
+                    <th>Dosage</th>
+                    <th>Frequency</th>
+                    <th>Quantity</th>
+                    <th>Expiry Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Medicine data will be inserted here -->
+            </tbody>
+        </table>
     </section>
-    <hr />
-    <nav>
-      <a href="index.html" onclick="shut()">
-        <button class="BACKBTUN">
-          <h3 class="BACK">Go Back</h3>
-        </button>
-      </a>
-    </nav>
-    <hr />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
