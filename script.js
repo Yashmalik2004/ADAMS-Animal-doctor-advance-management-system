@@ -1,198 +1,218 @@
-document.addEventListener("DOMContentLoaded", function () {
-  if (document.getElementById("data-form")) {
-    loadDataFromStorage();
-    document
-      .getElementById("data-form")
-      .addEventListener("submit", function (event) {
-        event.preventDefault();
-        addDataToTable();
-        showGlitchEffect();
-      });
+body {
+  font-family: "Orbitron", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(45deg, #1a1a2e, #2a489a, #0f3460);
+  background-size: 400% 400%;
+  animation: backgroundAnimation 10s infinite ease-in-out;
+  color: #fff;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    background-position: 0% 50%;
   }
-
-  if (document.getElementById("medicine-form")) {
-    loadMedicineFromStorage();
-    document
-      .getElementById("medicine-form")
-      .addEventListener("submit", function (event) {
-        event.preventDefault();
-        addMedicineToTable();
-        showGlitchEffect();
-      });
+  50% {
+    background-position: 100% 50%;
   }
-
-  document.querySelectorAll("input, textarea").forEach((input) => {
-    input.addEventListener("focus", function () {
-      this.classList.add("neon-glow");
-    });
-    input.addEventListener("blur", function () {
-      this.classList.remove("neon-glow");
-    });
-  });
-
-  startSciFiBackground();
-});
-
-function shut(){
-  window.open('index.html','_self');
-  window.close();
-}
-function showGlitchEffect() {
-  document.body.classList.add("glitch-effect");
-  setTimeout(() => {
-    document.body.classList.remove("glitch-effect");
-  }, 500);
-}
-
-function addDataToTable() {
-  const formData = new FormData(document.getElementById("data-form"));
-  const tableBody = document.querySelector("#data-table tbody");
-  const newRow = document.createElement("tr");
-
-  formData.forEach((value) => {
-    const newCell = document.createElement("td");
-    newCell.textContent = value;
-    newCell.classList.add("neon-text");
-    newRow.appendChild(newCell);
-  });
-
-  newRow.classList.add("table-row-glow");
-  tableBody.appendChild(newRow);
-  document.getElementById("data-form").reset();
-}
-
-function addMedicineToTable() {
-  const formData = new FormData(document.getElementById("medicine-form"));
-  const tableBody = document.querySelector("#medicine-table tbody");
-  const newRow = document.createElement("tr");
-
-  formData.forEach((value) => {
-    const newCell = document.createElement("td");
-    newCell.textContent = value;
-    newCell.classList.add("neon-text");
-    newRow.appendChild(newCell);
-  });
-
-  newRow.classList.add("table-row-glow");
-  tableBody.appendChild(newRow);
-  checkExpiryDate(formData.get("expiry-date"));
-  document.getElementById("medicine-form").reset();
-}
-
-function handleExcelUpload() {
-  const file = document.getElementById("excel-upload").files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const data = new Uint8Array(e.target.result);
-      const workbook = XLSX.read(data, { type: "array" });
-      const sheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[sheetName];
-      const json = XLSX.utils.sheet_to_json(worksheet);
-
-      json.forEach((row) => {
-        const tableBody = document.querySelector("#data-table tbody");
-        const newRow = document.createElement("tr");
-        Object.values(row).forEach((value) => {
-          const newCell = document.createElement("td");
-          newCell.textContent = value;
-          newCell.classList.add("neon-text");
-          newRow.appendChild(newCell);
-        });
-        newRow.classList.add("table-row-glow");
-        tableBody.appendChild(newRow);
-      });
-    };
-    reader.readAsArrayBuffer(file);
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-function checkExpiryDate(expiryDate) {
-  const today = new Date();
-  const expiry = new Date(expiryDate);
+header {
+  background-color: transparent;
+  color: #00eaff;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 22px;
+  text-shadow: 0px 0px 15px #00eaff;
+}
 
-  if (expiry < today) {
-    sendEmailNotification();
+header h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  text-align: center;
+}
+.indexBanner {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 0px 15px rgba(0, 234, 255, 0.3);
+  transition: 0.3s;
+  height: 400px;
+  width: 740px;
+}
+nav ul li {
+  display: inline;
+  margin: 0 20px;
+}
+
+nav ul li a {
+  color: #00eaff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+nav ul li a:hover {
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
+.BACKBTUN {
+  margin-left: 45%;
+  height: 50px;
+  transition: 0.4s;
+  border: 2px solid #00eaff;
+  border-radius: 20px;
+  background: transparent;
+  color: #feffff;
+  font-weight: bold;
+  text-shadow: 0px 0px 10px #00eaff;
+  cursor: pointer;
+  box-shadow: 0px 0px 15px #00eaff;
+}
+
+.BACKBTUN:hover {
+  background-color: #ff00ff;
+  color: #fff;
+  transition: 0.4s;
+  text-shadow: 0px 0px 15px #fff;
+  box-shadow: 0px 0px 20px #ff00ff;
+}
+
+section {
+  padding: 20px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 0px 15px rgba(0, 234, 255, 0.3);
+  transition: 0.3s;
+}
+
+section:hover {
+  box-shadow: 0px 0px 25px rgba(0, 234, 255, 0.5);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+form label {
+  font-weight: bold;
+  color: #fff;
+  margin-top: 10px;
+}
+
+form input,
+form textarea,
+form button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #00eaff;
+  background: transparent;
+  color: #fcfdfd;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #ff00ff;
+  box-shadow: 0 0 15px #ff00ff;
+  outline: none;
+}
+
+form button {
+  background-color: transparent;
+  border: 2px solid #00eaff;
+  color: #00eaff;
+  font-weight: bold;
+  text-shadow: 0px 0px 10px #00eaff;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+form button:hover {
+  background-color: #ff00ff;
+  color: #fff;
+  box-shadow: 0px 0px 20px #ff00ff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px rgba(0, 234, 255, 0.3);
+}
+
+table th,
+table td {
+  padding: 12px;
+  border: 1px solid #00eaff;
+  text-align: left;
+  color: #fff;
+}
+
+table th {
+  background-color: rgba(0, 234, 255, 0.2);
+  text-shadow: 0 0 8px #00eaff;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes glitch {
+  0% {
+    transform: skewX(0deg);
+  }
+  10% {
+    transform: skewX(-5deg);
+  }
+  20% {
+    transform: skewX(5deg);
+  }
+  30% {
+    transform: skewX(0deg);
   }
 }
 
-function sendEmailNotification() {
-  console.log("Sending email notification about expired medicine...");
-  alert("🚀 Sci-Fi Alert: Expired medicine detected! Notification sent.");
+.glitch-effect {
+  animation: glitch 0.1s infinite;
 }
 
-function startSciFiBackground() {
-  document.body.style.background =
-    "linear-gradient(45deg, #020024, #090979, #00d4ff)";
-  document.body.style.backgroundSize = "400% 400%";
-  document.body.style.animation = "gradientShift 8s ease infinite";
-}
-// Add event listeners
-document.getElementById('medicine-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-  addMedicineToTable();
-});
-
-function addMedicineToTable() {
-  const formData = new FormData(document.getElementById('medicine-form'));
-  const tableBody = document.querySelector('#medicine-table tbody');
-  const newRow = document.createElement('tr');
-
-  formData.forEach(value => {
-      const newCell = document.createElement('td');
-      newCell.textContent = value;
-      newRow.appendChild(newCell);
-  });
-
-  tableBody.appendChild(newRow);
-  checkExpiryDate(formData.get('expiry-date'));
-  document.getElementById('medicine-form').reset();
-}
-
-// Excel Upload for Medicine Vault
-function handleMedicineExcelUpload() {
-  const file = document.getElementById('medicine-excel-upload').files[0];
-  if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-          const data = new Uint8Array(e.target.result);
-          const workbook = XLSX.read(data, { type: 'array' });
-          const sheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[sheetName];
-          const json = XLSX.utils.sheet_to_json(worksheet);
-
-          json.forEach(row => {
-              const tableBody = document.querySelector('#medicine-table tbody');
-              const newRow = document.createElement('tr');
-
-              // Columns: Animal Type, Disease, Medicine, Dosage, Frequency, Medicine Code, Quantity, Expiry Date
-              const keys = ['Animal Type', 'Disease', 'Medicine', 'Dosage', 'Frequency', 'Medicine Code', 'Quantity', 'Expiry Date'];
-
-              keys.forEach(key => {
-                  const newCell = document.createElement('td');
-                  newCell.textContent = row[key] || ''; // Handle missing columns gracefully
-                  newRow.appendChild(newCell);
-              });
-
-              tableBody.appendChild(newRow);
-          });
-      };
-      reader.readAsArrayBuffer(file);
+@media screen and (max-width: 768px) {
+  section {
+    width: 95%;
   }
-}
 
-// Expiry Date Checker
-function checkExpiryDate(expiryDate) {
-  const today = new Date();
-  const expiry = new Date(expiryDate);
-
-  if (expiry < today) {
-      sendEmailNotification();
+  nav ul {
+    padding: 0;
   }
-}
 
-// Placeholder email function (use backend for real emails)
-function sendEmailNotification() {
-  console.log('Sending email notification about expired medicine...');
-  alert('Email notification sent about expired medicine.');
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
 }
