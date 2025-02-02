@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   startSciFiBackground();
 });
+
 function shut(){
   window.open('index.html','_self');
   window.close();
@@ -125,4 +126,73 @@ function startSciFiBackground() {
     "linear-gradient(45deg, #020024, #090979, #00d4ff)";
   document.body.style.backgroundSize = "400% 400%";
   document.body.style.animation = "gradientShift 8s ease infinite";
+}
+// Add event listeners
+document.getElementById('medicine-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  addMedicineToTable();
+});
+
+function addMedicineToTable() {
+  const formData = new FormData(document.getElementById('medicine-form'));
+  const tableBody = document.querySelector('#medicine-table tbody');
+  const newRow = document.createElement('tr');
+
+  formData.forEach(value => {
+      const newCell = document.createElement('td');
+      newCell.textContent = value;
+      newRow.appendChild(newCell);
+  });
+
+  tableBody.appendChild(newRow);
+  checkExpiryDate(formData.get('expiry-date'));
+  document.getElementById('medicine-form').reset();
+}
+
+// Excel Upload for Medicine Vault
+function handleMedicineExcelUpload() {
+  const file = document.getElementById('medicine-excel-upload').files[0];
+  if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+          const json = XLSX.utils.sheet_to_json(worksheet);
+
+          json.forEach(row => {
+              const tableBody = document.querySelector('#medicine-table tbody');
+              const newRow = document.createElement('tr');
+
+              // Columns: Animal Type, Disease, Medicine, Dosage, Frequency, Medicine Code, Quantity, Expiry Date
+              const keys = ['Animal Type', 'Disease', 'Medicine', 'Dosage', 'Frequency', 'Medicine Code', 'Quantity', 'Expiry Date'];
+
+              keys.forEach(key => {
+                  const newCell = document.createElement('td');
+                  newCell.textContent = row[key] || ''; // Handle missing columns gracefully
+                  newRow.appendChild(newCell);
+              });
+
+              tableBody.appendChild(newRow);
+          });
+      };
+      reader.readAsArrayBuffer(file);
+  }
+}
+
+// Expiry Date Checker
+function checkExpiryDate(expiryDate) {
+  const today = new Date();
+  const expiry = new Date(expiryDate);
+
+  if (expiry < today) {
+      sendEmailNotification();
+  }
+}
+
+// Placeholder email function (use backend for real emails)
+function sendEmailNotification() {
+  console.log('Sending email notification about expired medicine...');
+  alert('Email notification sent about expired medicine.');
 }
